@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\rest\Plugin\rest\resource\EntityResource.
+ */
+
 namespace Drupal\rest\Plugin\rest\resource;
 
 use Drupal\Core\Entity\EntityInterface;
@@ -107,10 +112,9 @@ class EntityResource extends ResourceBase {
       $entity->save();
       $this->logger->notice('Created entity %type with ID %id.', array('%type' => $entity->getEntityTypeId(), '%id' => $entity->id()));
 
-      // 201 Created responses return the newly created entity in the response
-      // body.
+      // 201 Created responses have an empty body.
       $url = $entity->urlInfo('canonical', ['absolute' => TRUE])->toString(TRUE);
-      $response = new ResourceResponse($entity, 201, ['Location' => $url->getGeneratedUrl()]);
+      $response = new ResourceResponse(NULL, 201, ['Location' => $url->getGeneratedUrl()]);
       // Responses after creating an entity are not cacheable, so we add no
       // cacheability metadata here.
       return $response;

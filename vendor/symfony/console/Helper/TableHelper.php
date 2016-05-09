@@ -13,7 +13,6 @@ namespace Symfony\Component\Console\Helper;
 
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\Console\Exception\InvalidArgumentException;
 
 /**
  * Provides helpers to display table output.
@@ -51,7 +50,7 @@ class TableHelper extends Helper
      *
      * @return TableHelper
      *
-     * @throws InvalidArgumentException when the table layout is not known
+     * @throws \InvalidArgumentException when the table layout is not known
      */
     public function setLayout($layout)
     {
@@ -69,8 +68,8 @@ class TableHelper extends Helper
                 break;
 
             default:
-                throw new InvalidArgumentException(sprintf('Invalid table layout "%s".', $layout));
-        }
+                throw new \InvalidArgumentException(sprintf('Invalid table layout "%s".', $layout));
+        };
 
         return $this;
     }

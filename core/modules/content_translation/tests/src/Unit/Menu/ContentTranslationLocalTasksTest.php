@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\Tests\content_translation\Unit\Menu\ContentTranslationLocalTasksTest.
+ */
+
 namespace Drupal\Tests\content_translation\Unit\Menu;
 
 use Drupal\Tests\Core\Menu\LocalTaskIntegrationTestBase;

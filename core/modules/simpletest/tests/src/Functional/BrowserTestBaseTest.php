@@ -1,8 +1,13 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\Tests\simpletest\Functional\BrowserTestBaseTest.
+ */
+
 namespace Drupal\Tests\simpletest\Functional;
 
-use Drupal\Tests\BrowserTestBase;
+use Drupal\simpletest\BrowserTestBase;
 
 /**
  * Tests BrowserTestBase functionality.

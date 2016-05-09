@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\KernelTests\Core\Entity\EntityKernelTestBase.
+ */
+
 namespace Drupal\KernelTests\Core\Entity;
 
 use Drupal\Core\Entity\EntityInterface;

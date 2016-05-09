@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\node\NodeForm.
+ */
+
 namespace Drupal\node;
 
 use Drupal\Core\Entity\ContentEntityForm;

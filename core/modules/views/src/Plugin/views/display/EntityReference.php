@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\views\Plugin\views\display\EntityReference.
+ */
+
 namespace Drupal\views\Plugin\views\display;
 
 /**

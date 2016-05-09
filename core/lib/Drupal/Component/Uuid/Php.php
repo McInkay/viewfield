@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\Component\Uuid\Php.
+ */
+
 namespace Drupal\Component\Uuid;
 
 use Drupal\Component\Utility\Crypt;

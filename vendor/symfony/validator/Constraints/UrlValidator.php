@@ -34,7 +34,7 @@ class UrlValidator extends ConstraintValidator
                 \]  # a IPv6 address
             )
             (:[0-9]+)?                              # a port (optional)
-            (/?|/\S+|\?\S*|\#\S*)                   # a /, nothing, a / with something, a query or a fragment
+            (/?|/\S+|\?|\#)                         # a /, nothing, a / with something, a query or a fragment
         $~ixu';
 
     /**
@@ -65,12 +65,10 @@ class UrlValidator extends ConstraintValidator
             if ($this->context instanceof ExecutionContextInterface) {
                 $this->context->buildViolation($constraint->message)
                     ->setParameter('{{ value }}', $this->formatValue($value))
-                    ->setCode(Url::INVALID_URL_ERROR)
                     ->addViolation();
             } else {
                 $this->buildViolation($constraint->message)
                     ->setParameter('{{ value }}', $this->formatValue($value))
-                    ->setCode(Url::INVALID_URL_ERROR)
                     ->addViolation();
             }
 
@@ -83,14 +81,12 @@ class UrlValidator extends ConstraintValidator
             if (!checkdnsrr($host, 'ANY')) {
                 if ($this->context instanceof ExecutionContextInterface) {
                     $this->context->buildViolation($constraint->dnsMessage)
-                        ->setParameter('{{ value }}', $this->formatValue($host))
-                        ->setCode(Url::INVALID_URL_ERROR)
-                        ->addViolation();
+                       ->setParameter('{{ value }}', $this->formatValue($host))
+                       ->addViolation();
                 } else {
                     $this->buildViolation($constraint->dnsMessage)
-                        ->setParameter('{{ value }}', $this->formatValue($host))
-                        ->setCode(Url::INVALID_URL_ERROR)
-                        ->addViolation();
+                       ->setParameter('{{ value }}', $this->formatValue($host))
+                       ->addViolation();
                 }
             }
         }

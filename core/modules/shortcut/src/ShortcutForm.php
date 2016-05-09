@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\shortcut\ShortcutForm.
+ */
+
 namespace Drupal\shortcut;
 
 use Drupal\Core\Entity\ContentEntityForm;

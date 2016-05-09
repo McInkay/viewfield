@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\Core\StringTranslation\TranslationInterface.
+ */
+
 namespace Drupal\Core\StringTranslation;
 
 /**

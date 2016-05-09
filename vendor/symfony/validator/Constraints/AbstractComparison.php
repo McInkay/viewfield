@@ -18,7 +18,6 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
  * Used for the comparison of values.
  *
  * @author Daniel Holmes <daniel@danielholmes.org>
- * @author Bernhard Schussek <bschussek@gmail.com>
  */
 abstract class AbstractComparison extends Constraint
 {

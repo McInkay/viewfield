@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\rest\Tests\RESTTestBase.
+ */
+
 namespace Drupal\rest\Tests;
 
 use Drupal\node\NodeInterface;
@@ -189,9 +194,7 @@ abstract class RESTTestBase extends WebTestBase {
    *   The new entity object.
    */
   protected function entityCreate($entity_type) {
-    return $this->container->get('entity_type.manager')
-      ->getStorage($entity_type)
-      ->create($this->entityValues($entity_type));
+    return entity_create($entity_type, $this->entityValues($entity_type));
   }
 
   /**

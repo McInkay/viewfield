@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\Core\Config\UnmetDependenciesException.
+ */
+
 namespace Drupal\Core\Config;
 
 use Drupal\Component\Utility\SafeMarkup;

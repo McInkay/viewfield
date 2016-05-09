@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\book\BookManager.
+ */
+
 namespace Drupal\book;
 
 use Drupal\Component\Utility\Unicode;

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\field_ui\EntityFormModeListBuilder.
+ */
+
 namespace Drupal\field_ui;
 
 /**

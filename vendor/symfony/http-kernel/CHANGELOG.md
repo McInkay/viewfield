@@ -1,11 +1,6 @@
 CHANGELOG
 =========
 
-2.8.0
------
-
- * deprecated `Profiler::import` and `Profiler::export`
-
 2.7.0
 -----
 

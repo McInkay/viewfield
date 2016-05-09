@@ -60,6 +60,7 @@ interface ConstraintViolationInterface
      *               that appear in the message template.
      *
      * @see getMessageTemplate()
+     *
      * @deprecated since version 2.7, to be replaced by getParameters() in 3.0.
      */
     public function getMessageParameters();
@@ -119,7 +120,7 @@ interface ConstraintViolationInterface
     /**
      * Returns a machine-digestible error code for the violation.
      *
-     * @return string|null The error code.
+     * @return mixed The error code.
      */
     public function getCode();
 }

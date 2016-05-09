@@ -37,12 +37,10 @@ class IsFalseValidator extends ConstraintValidator
         if ($this->context instanceof ExecutionContextInterface) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $this->formatValue($value))
-                ->setCode(IsFalse::NOT_FALSE_ERROR)
                 ->addViolation();
         } else {
             $this->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $this->formatValue($value))
-                ->setCode(IsFalse::NOT_FALSE_ERROR)
                 ->addViolation();
         }
     }

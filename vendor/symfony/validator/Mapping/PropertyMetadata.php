@@ -58,11 +58,12 @@ class PropertyMetadata extends MemberMetadata
      */
     protected function newReflectionMember($objectOrClassName)
     {
-        while (!property_exists($objectOrClassName, $this->getName())) {
-            $objectOrClassName = get_parent_class($objectOrClassName);
+        $class = new \ReflectionClass($objectOrClassName);
+        while (!$class->hasProperty($this->getName())) {
+            $class = $class->getParentClass();
         }
 
-        $member = new \ReflectionProperty($objectOrClassName, $this->getName());
+        $member = new \ReflectionProperty($class->getName(), $this->getName());
         $member->setAccessible(true);
 
         return $member;

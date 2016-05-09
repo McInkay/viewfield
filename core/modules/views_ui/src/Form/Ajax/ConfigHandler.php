@@ -1,8 +1,14 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\views_ui\Form\Ajax\ConfigHandler.
+ */
+
 namespace Drupal\views_ui\Form\Ajax;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 use Drupal\views\ViewEntityInterface;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Views;

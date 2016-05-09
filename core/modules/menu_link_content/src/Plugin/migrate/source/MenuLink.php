@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\menu_link_content\Plugin\migrate\source\MenuLink.
+ */
+
 namespace Drupal\menu_link_content\Plugin\migrate\source;
 
 use Drupal\Component\Utility\Unicode;

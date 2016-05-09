@@ -126,10 +126,7 @@ class XmlDumper extends Dumper
         if ($definition->getFactoryService(false)) {
             $service->setAttribute('factory-service', $definition->getFactoryService(false));
         }
-        if (!$definition->isShared()) {
-            $service->setAttribute('shared', 'false');
-        }
-        if (ContainerInterface::SCOPE_CONTAINER !== $scope = $definition->getScope(false)) {
+        if (ContainerInterface::SCOPE_CONTAINER !== $scope = $definition->getScope()) {
             $service->setAttribute('scope', $scope);
         }
         if (!$definition->isPublic()) {
@@ -145,13 +142,10 @@ class XmlDumper extends Dumper
             $service->setAttribute('lazy', 'true');
         }
         if (null !== $decorated = $definition->getDecoratedService()) {
-            list($decorated, $renamedId, $priority) = $decorated;
+            list($decorated, $renamedId) = $decorated;
             $service->setAttribute('decorates', $decorated);
             if (null !== $renamedId) {
                 $service->setAttribute('decoration-inner-name', $renamedId);
-            }
-            if (0 !== $priority) {
-                $service->setAttribute('decoration-priority', $priority);
             }
         }
 
@@ -195,24 +189,6 @@ class XmlDumper extends Dumper
                 $factory->setAttribute('function', $callable);
             }
             $service->appendChild($factory);
-        }
-
-        if ($definition->isDeprecated()) {
-            $deprecated = $this->document->createElement('deprecated');
-            $deprecated->appendChild($this->document->createTextNode($definition->getDeprecationMessage('%service_id%')));
-
-            $service->appendChild($deprecated);
-        }
-
-        if ($definition->isAutowired()) {
-            $service->setAttribute('autowire', 'true');
-        }
-
-        foreach ($definition->getAutowiringTypes() as $autowiringTypeValue) {
-            $autowiringType = $this->document->createElement('autowiring-type');
-            $autowiringType->appendChild($this->document->createTextNode($autowiringTypeValue));
-
-            $service->appendChild($autowiringType);
         }
 
         if ($callable = $definition->getConfigurator()) {
@@ -307,7 +283,7 @@ class XmlDumper extends Dumper
                 } elseif ($behaviour == ContainerInterface::IGNORE_ON_INVALID_REFERENCE) {
                     $element->setAttribute('on-invalid', 'ignore');
                 }
-                if (!$value->isStrict(false)) {
+                if (!$value->isStrict()) {
                     $element->setAttribute('strict', 'false');
                 }
             } elseif ($value instanceof Definition) {

@@ -25,8 +25,6 @@ class Reference
     /**
      * Constructor.
      *
-     * Note: The $strict parameter is deprecated since version 2.8 and will be removed in 3.0.
-     *
      * @param string $id              The service identifier
      * @param int    $invalidBehavior The behavior when the service does not exist
      * @param bool   $strict          Sets how this reference is validated
@@ -64,15 +62,9 @@ class Reference
      * Returns true when this Reference is strict.
      *
      * @return bool
-     *
-     * @deprecated since version 2.8, to be removed in 3.0.
      */
-    public function isStrict($triggerDeprecationError = true)
+    public function isStrict()
     {
-        if ($triggerDeprecationError) {
-            @trigger_error('The '.__METHOD__.' method is deprecated since version 2.8 and will be removed in 3.0.', E_USER_DEPRECATED);
-        }
-
         return $this->strict;
     }
 }

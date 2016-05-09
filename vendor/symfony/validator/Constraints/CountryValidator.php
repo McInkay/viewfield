@@ -48,12 +48,10 @@ class CountryValidator extends ConstraintValidator
             if ($this->context instanceof ExecutionContextInterface) {
                 $this->context->buildViolation($constraint->message)
                     ->setParameter('{{ value }}', $this->formatValue($value))
-                    ->setCode(Country::NO_SUCH_COUNTRY_ERROR)
                     ->addViolation();
             } else {
                 $this->buildViolation($constraint->message)
                     ->setParameter('{{ value }}', $this->formatValue($value))
-                    ->setCode(Country::NO_SUCH_COUNTRY_ERROR)
                     ->addViolation();
             }
         }

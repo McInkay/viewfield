@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\content_translation\Plugin\Derivative\ContentTranslationLocalTasks.
+ */
+
 namespace Drupal\content_translation\Plugin\Derivative;
 
 use Drupal\content_translation\ContentTranslationManagerInterface;

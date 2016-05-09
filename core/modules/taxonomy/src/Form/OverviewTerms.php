@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\taxonomy\Form\OverviewTerms.
+ */
+
 namespace Drupal\taxonomy\Form;
 
 use Drupal\Core\Entity\EntityManagerInterface;

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\Core\PhpStorage\PhpStorageFactory.
+ */
+
 namespace Drupal\Core\PhpStorage;
 
 use Drupal\Core\Site\Settings;

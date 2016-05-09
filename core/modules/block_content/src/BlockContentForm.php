@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\block_content\BlockContentForm.
+ */
+
 namespace Drupal\block_content;
 
 use Drupal\Component\Utility\Html;

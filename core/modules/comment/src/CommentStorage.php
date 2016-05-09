@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\comment\CommentStorage.
+ */
+
 namespace Drupal\comment;
 
 use Drupal\Core\Cache\CacheBackendInterface;

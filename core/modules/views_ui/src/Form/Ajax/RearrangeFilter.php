@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\views_ui\Form\Ajax\RearrangeFilter.
+ */
+
 namespace Drupal\views_ui\Form\Ajax;
 
 use Drupal\Component\Utility\Html;

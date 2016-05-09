@@ -12,7 +12,6 @@
 namespace Symfony\Component\Console\Style;
 
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -110,7 +109,7 @@ class SymfonyStyle extends OutputStyle
         $this->autoPrependBlock();
         $this->writeln(array(
             sprintf('<comment>%s</>', $message),
-            sprintf('<comment>%s</>', str_repeat('=', Helper::strlenWithoutDecoration($this->getFormatter(), $message))),
+            sprintf('<comment>%s</>', str_repeat('=', strlen($message))),
         ));
         $this->newLine();
     }
@@ -123,7 +122,7 @@ class SymfonyStyle extends OutputStyle
         $this->autoPrependBlock();
         $this->writeln(array(
             sprintf('<comment>%s</>', $message),
-            sprintf('<comment>%s</>', str_repeat('-', Helper::strlenWithoutDecoration($this->getFormatter(), $message))),
+            sprintf('<comment>%s</>', str_repeat('-', strlen($message))),
         ));
         $this->newLine();
     }
@@ -149,22 +148,14 @@ class SymfonyStyle extends OutputStyle
     {
         $this->autoPrependText();
 
-        $messages = is_array($message) ? array_values($message) : array($message);
-        foreach ($messages as $message) {
-            $this->writeln(sprintf(' %s', $message));
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function comment($message)
-    {
-        $this->autoPrependText();
-
-        $messages = is_array($message) ? array_values($message) : array($message);
-        foreach ($messages as $message) {
+        if (!is_array($message)) {
             $this->writeln(sprintf(' // %s', $message));
+
+            return;
+        }
+
+        foreach ($message as $element) {
+            $this->text($element);
         }
     }
 
@@ -303,7 +294,7 @@ class SymfonyStyle extends OutputStyle
     {
         $progressBar = parent::createProgressBar($max);
 
-        if ('\\' !== DIRECTORY_SEPARATOR) {
+        if ('\\' === DIRECTORY_SEPARATOR) {
             $progressBar->setEmptyBarCharacter('░'); // light shade character \u2591
             $progressBar->setProgressCharacter('');
             $progressBar->setBarCharacter('▓'); // dark shade character \u2593
@@ -370,7 +361,7 @@ class SymfonyStyle extends OutputStyle
     private function getProgressBar()
     {
         if (!$this->progressBar) {
-            throw new RuntimeException('The ProgressBar is not started.');
+            throw new \RuntimeException('The ProgressBar is not started.');
         }
 
         return $this->progressBar;
