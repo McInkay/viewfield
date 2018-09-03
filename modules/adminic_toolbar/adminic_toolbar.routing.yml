@@ -1,0 +1,47 @@
+adminic_toolbar_configuration.form:
+ path: '/admin/config/user-interface/adminic-toolbar'
+ defaults:
+   _title: 'Adminic Toolbar Configuration'
+   _form: '\Drupal\adminic_toolbar\Form\ToolbarConfigurationForm'
+ requirements:
+   _permission: 'access content'
+
+adminic_toolbar_configuration.cache:
+  path: '/admin/config/system/clear-cache/{cache}'
+  defaults:
+    _controller: '\Drupal\adminic_toolbar\Controller\ToolbarDeveloperLinks::cache'
+    _title: 'Clear caches'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'administer site configuration'
+
+adminic_toolbar_configuration.cron:
+  path: '/admin/config/system/run-cron'
+  defaults:
+    _controller: '\Drupal\adminic_toolbar\Controller\ToolbarDeveloperLinks::cron'
+    _title: 'Run cron'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'administer site configuration'
+
+adminic_toolbar_configuration.update:
+  path: '/admin/config/system/run-updates'
+  defaults:
+    _controller: '\Drupal\adminic_toolbar\Controller\ToolbarDeveloperLinks::update'
+    _title: 'Run cron'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'administer site configuration'
+
+adminic_toolbar_configuration.use_preset:
+  path: '/admin/config/user-interface/adminic-toolbar/{preset}'
+  defaults:
+    _controller: '\Drupal\adminic_toolbar\Controller\ToolbarUserConfig::usePreset'
+    _title: 'Use toolbar preset'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'can use adminic toolbar'
