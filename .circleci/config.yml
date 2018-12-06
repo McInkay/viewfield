@@ -1,0 +1,63 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/php:7.1-apache-node-browsers
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mysql:9.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - add_ssh_keys:
+          fingerprints:
+            - "d8:9c:f3:7b:8b:32:83:d2:9e:65:89:56:87:34:70:86"
+
+      - run:
+          name: "Pull Submodules"
+          command: |
+            git submodule init
+            git submodule update --remote
+
+      - run:
+          name: Setup tools
+          command: |
+            sudo apt-get -qq update && sudo apt-get -qqy upgrade
+            sudo apt-get -yqq install libpng-dev mariadb-client nano
+            sudo docker-php-ext-install gd mbstring mysqli pdo pdo_mysql
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "composer.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: composer install -n --prefer-dist
+
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
+
+      # Delete settings before deploying
+      - run: rm web/sites/default/settings.php
+
+      - deploy:
+          name: deploy master
+          command: |
+            if [ "${CIRCLE_BRANCH}" = 'master' ]; then
+               sudo apt-get install -y rsync
+               echo 'home27172932.1and1-data.host,2001:8d8:1000:3029:2545:d5e3:2d0f:b009 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFjDE2sDVlaHhXudMMsLEuJvY+nBuTbwLGpQkLaJ5oxIR9vXinw/2dSzqnDAlrmJ1ZgWKQnvPh7Mz770Hp/sobU=' >> ~/.ssh/known_hosts
+               rsync -a ./ u7644396@home27172932.1and1-data.host:~/staging/ && ssh u7644396@home27172932.1and1-data.host rsync -a ~/staging/ /var/www/staging/
+            fi
