@@ -1,0 +1,48 @@
+.admin-action .views-field-title {
+    text-align: center;
+  }
+  
+  .admin-action .views-field-field-icon .field-content {
+    width: 75%;
+    margin: auto;
+  }
+  
+  .podcast .views-field-field-date,
+  .podcast .views-field-field-speaker,
+  .podcast .views-field-field-passage {
+  }
+  
+  
+  #block-calendar iframe {
+    height: calc(500px - 2rem);
+  }
+  
+  #block-map iframe {
+    height: 450px;
+  }
+  
+  .welcome-banner-text {
+    max-width: 100%;
+  }
+  
+  .welcome-banner-text .carousel {
+    height: 70vh;
+  }
+  
+  .welcome-banner-text .carousel-inner {
+    height: 100%;
+    color: white;
+  }
+  
+  .welcome-banner-text .carousel-inner h1,
+  .welcome-banner-text .carousel-inner h2,
+  .welcome-banner-text .carousel-inner h3,
+  .welcome-banner-text .carousel-inner h4,
+  .welcome-banner-text .carousel-inner p {
+    color: white;
+  }
+  
+  .main-header nav.navbar {
+    z-index: 3;
+  }
+  

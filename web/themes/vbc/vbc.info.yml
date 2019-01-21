@@ -8,6 +8,7 @@ libraries:
   - drupal8_zymphonies_theme/bootstrap
   - drupal8_zymphonies_theme/fontawesome
   - drupal8_zymphonies_theme/global-components
+  - vbc/global-styling
 
 version: '0.0.1'
 core: '8.x'
