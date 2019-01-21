@@ -1,0 +1,3 @@
+[submodule "web/themes/vbc"]
+	path = web/themes/vbc
+	url = https://github.com/YaManicKill/vbc-theme.git
