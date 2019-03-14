@@ -22,7 +22,6 @@
         "drupal/console": "1.8.0",
         "drupal/core": "8.6.10",
         "drush/drush": "9.4.0",
-        "vlucas/phpdotenv": "2.6.1",
         "webflo/drupal-finder": "1.1.0",
         "webmozart/path-util": "2.3.0"
     },
@@ -40,8 +39,7 @@
     "autoload": {
         "classmap": [
             "scripts/composer/ScriptHandler.php"
-        ],
-        "files": ["load.environment.php"]
+        ]
     },
     "scripts": {
         "pre-install-cmd": [
