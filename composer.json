@@ -20,13 +20,13 @@
         "cweagans/composer-patches": "1.6.5",
         "drupal-composer/drupal-scaffold": "2.5.4",
         "drupal/console": "1.8.0",
-        "drupal/core": "8.6.10",
+        "drupal/core": "8.6.11",
         "drush/drush": "9.4.0",
         "webflo/drupal-finder": "1.1.0",
         "webmozart/path-util": "2.3.0"
     },
     "require-dev": {
-        "webflo/drupal-core-require-dev": "8.6.10"
+        "webflo/drupal-core-require-dev": "8.6.11"
     },
     "conflict": {
         "drupal/drupal": "*"
