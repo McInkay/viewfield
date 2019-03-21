@@ -25,9 +25,6 @@
         "webflo/drupal-finder": "1.1.0",
         "webmozart/path-util": "2.3.0"
     },
-    "require-dev": {
-        "webflo/drupal-core-require-dev": "8.6.12"
-    },
     "conflict": {
         "drupal/drupal": "*"
     },
