@@ -4,8 +4,8 @@
   "type": "drupal-module",
   "minimum-stability": "dev",
   "require": {
-    "james-heinrich/getid3": "^1.9",
-    "drupal/core": "~8.4",
+    "james-heinrich/getid3": "1.9.17",
+    "drupal/core": "8.6.13",
     "drupal/views_rss": "2.x-dev"
   }
 }
