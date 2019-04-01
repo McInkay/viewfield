@@ -328,7 +328,7 @@ function views_rss_core_preprocess_item_enclosure(&$variables) {
 
       $original_file = $item['rendered']['#markup'];
 
-      _add_podtrac_redirect($item['rendered']['#markup']);
+//      _add_podtrac_redirect($item['rendered']['#markup']);
 
       $element['attributes']['url'] = $item['rendered']['#markup'];
 
