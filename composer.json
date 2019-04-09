@@ -18,7 +18,7 @@
     "require": {
         "composer/installers": "1.6.0",
         "cweagans/composer-patches": "1.6.5",
-        "drupal-composer/drupal-scaffold": "2.5.4",
+        "drupal-composer/drupal-scaffold": "2.6.1",
         "drupal/console": "1.8.0",
         "drupal/core": "8.6.14",
         "drush/drush": "9.4.0",
