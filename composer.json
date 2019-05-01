@@ -20,7 +20,7 @@
         "cweagans/composer-patches": "1.6.5",
         "drupal-composer/drupal-scaffold": "2.6.1",
         "drupal/console": "1.8.0",
-        "drupal/core": "8.6.15",
+        "drupal/core": "8.7.0",
         "drush/drush": "9.6.2",
         "webflo/drupal-finder": "1.1.0",
         "webmozart/path-util": "2.3.0"
