@@ -5,7 +5,7 @@
   "minimum-stability": "dev",
   "require": {
     "james-heinrich/getid3": "1.9.17",
-    "drupal/core": "8.7.0",
+    "drupal/core": "8.7.1",
     "drupal/views_rss": "2.x-dev"
   }
 }
