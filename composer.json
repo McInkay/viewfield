@@ -19,7 +19,7 @@
         "composer/installers": "1.7.0",
         "cweagans/composer-patches": "1.6.6",
         "drupal-composer/drupal-scaffold": "2.6.1",
-        "drupal/console": "1.9.1",
+        "drupal/console": "1.9.2",
         "drupal/core": "8.7.6",
         "drush/drush": "9.7.1",
         "webflo/drupal-finder": "1.2.0",
