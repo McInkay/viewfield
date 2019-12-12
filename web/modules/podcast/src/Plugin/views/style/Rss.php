@@ -67,9 +67,8 @@ class Rss extends ViewsRss {
     unset($form['description']);
 
     $form['title_field'] = [
-      '#type' => 'select',
+      '#type' => 'textfield',
       '#title' => $this->t('Title field'),
-      '#options' => $view_fields_labels,
       '#default_value' => $this->options['title_field'],
       '#description' => $this->t('Podcast name to display in the feed. Defaults to the view name.'),
       '#maxlength' => 1024,

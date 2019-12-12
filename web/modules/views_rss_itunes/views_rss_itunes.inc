@@ -16,12 +16,14 @@ function views_rss_itunes_preprocess_channel_category(&$variables) {
     return;
   }
 
-  $elements = array();
+  $elements = [];
   foreach ($variables['elements'][0]['value'] as $tid) {
     // Load term object.
     $term = Term::load($tid);
     // Try to load parent term objects.
-    $parents = \Drupal::entityManager()->getStorage('taxonomy_term')->loadParents($tid);
+    $parents = \Drupal::entityManager()
+      ->getStorage('taxonomy_term')
+      ->loadParents($tid);
     // Term has a parent.
     // TODO revisit the core functionality in Drupal 8.4 for views_rss
     // https://www.drupal.org/node/2694535
@@ -29,29 +31,29 @@ function views_rss_itunes_preprocess_channel_category(&$variables) {
     if (count($parents)) {
       $parent = array_shift($parents);
       if (!isset($elements[$parent->id()])) {
-        $elements[] = array(
+        $elements[] = [
           'key' => 'itunes:category',
-          'attributes' => array(
+          'attributes' => [
             'text' => $parent->getName(),
-          ),
-        );
+          ],
+          'value' => [
+            '#theme' => 'xml_element',
+            '#tag' => 'itunes:category',
+            '#attributes' => [
+              'text' => $term->getName(),
+            ],
+          ],
+        ];
       }
-      //$elements[$parent->id()]['value'][$term->id()] = array(
-      $elements[$term->id()] = array(
-        'key' => 'itunes:category',
-        'attributes' => array(
-          'text' => $term->getName(),
-        ),
-      );
     }
     // Term has no parent.
     else {
-      $elements[$term->id()] = array(
+      $elements[$term->id()] = [
         'key' => 'itunes:category',
-        'attributes' => array(
+        'attributes' => [
           'text' => $term->getName(),
-        ),
-      );
+        ],
+      ];
     }
   }
   $variables['elements'] = $elements;
@@ -66,9 +68,9 @@ function views_rss_itunes_preprocess_channel_image(&$variables) {
     return;
   }
 
-  $variables['elements'][0]['attributes'] = array(
+  $variables['elements'][0]['attributes'] = [
     'href' => file_create_url($variables['elements'][0]['value']),
-  );
+  ];
   unset($variables['elements'][0]['value']);
 }
 
@@ -82,18 +84,26 @@ function views_rss_itunes_preprocess_channel_owner(&$variables) {
   }
 
   $values = explode(',', $variables['elements'][0]['value']);
-  $variables['elements'][0]['value'] = array();
+  $variables['elements'][0]['value'] = [];
 
   // Add email subelement.
   $email = array_shift($values);
   if (!empty($email)) {
-    $variables['elements'][0]['value']['itunes:email'] = trim($email);
+    $variables['elements'][0]['value'][] = [
+      '#theme' => 'xml_element',
+      '#tag' => 'itunes:email',
+      '#value' => trim($email),
+    ];
   }
 
   // Add name subelement.
   $name = array_shift($values);
   if (!empty($name)) {
-    $variables['elements'][0]['value']['itunes:name'] = trim($name);
+    $variables['elements'][0]['value'][] = [
+      '#theme' => 'xml_element',
+      '#tag' => 'itunes:name',
+      '#value' => trim($name),
+    ];
   }
 }
 
@@ -102,8 +112,10 @@ function views_rss_itunes_preprocess_channel_owner(&$variables) {
  * element configuration in view options form.
  */
 function views_rss_itunes_get_category_options() {
-  $tree = \Drupal::entityManager()->getStorage('taxonomy_term')->loadTree('views_rss_itunes_category');
-  $options = array();
+  $tree = \Drupal::entityManager()
+    ->getStorage('taxonomy_term')
+    ->loadTree('views_rss_itunes_category');
+  $options = [];
   if (!empty($tree)) {
     foreach ($tree as $term) {
       $options[$term->tid] = str_pad(t($term->name), strlen(t($term->name)) + $term->depth * 2, '- ', STR_PAD_LEFT);
@@ -123,7 +135,7 @@ function views_rss_itunes_preprocess_item_duration(&$variables) {
 
   $getID3 = new getID3();
 
-  $variables['elements'] = array();
+  $variables['elements'] = [];
   foreach ($variables['raw']['items'] as $item) {
     if (!empty($item['rendered']['#file'])) {
       $path = drupal_realpath($item['rendered']['#file']->getFileUri());
@@ -142,10 +154,10 @@ function views_rss_itunes_preprocess_item_duration(&$variables) {
   }
 
   if (!empty($id3_info['playtime_string'])) {
-    $variables['elements'][] = array(
+    $variables['elements'][] = [
       'key' => 'itunes:duration',
       'value' => $id3_info['playtime_string'],
-    );
+    ];
   }
 }
 
@@ -158,7 +170,7 @@ function views_rss_itunes_preprocess_item_image(&$variables) {
     return;
   }
 
-  $variables['elements'] = array();
+  $variables['elements'] = [];
   foreach ($variables['raw']['items'] as $item) {
     // File fields.
     if (!empty($item['rendered']['#file'])) {
@@ -187,10 +199,10 @@ function views_rss_itunes_preprocess_item_image(&$variables) {
       $href = $item['rendered']['#markup'];
     }
 
-    $element = array(
+    $element = [
       'key' => 'itunes:image',
-      'attributes' => array('href' => $href),
-    );
+      'attributes' => ['href' => $href],
+    ];
 
     $variables['elements'][] = $element;
   }
@@ -207,7 +219,7 @@ function _convert_to_local_file(&$filename) {
 
 
   $filename = rawurldecode($filename);
-  
+
   // Strip /sites/default/files if it exists at the beginning of the filename.
   // @TODO work with the web/ root instead
   if (preg_match('/^\/sites\/default\/files\//', $filename)) {
@@ -215,6 +227,7 @@ function _convert_to_local_file(&$filename) {
   }
 
   // Add the base path.
-  $filename = \Drupal::service('file_system')->realpath(file_default_scheme() . "://") . $filename;
+  $filename = \Drupal::service('file_system')
+      ->realpath(file_default_scheme() . "://") . $filename;
 
 }

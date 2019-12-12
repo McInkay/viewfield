@@ -104,7 +104,6 @@ function views_rss_itunes_views_rss_item_elements() {
   );
   $elements['itunes:duration'] = array(
     'description' => t('The content of this tag is shown in the Time column in iTunes.'),
-    'preprocess functions' => array('views_rss_itunes_preprocess_item_duration'),
     'help' => 'http://www.apple.com/itunes/podcasts/specs.html#duration',
   );
   $elements['itunes:keywords'] = array(

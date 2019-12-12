@@ -7,9 +7,9 @@
 
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\media\Entity\Media;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\core\Url;
-use Drupal\media_entity\Entity\Media;
 use Drupal\image\Entity\ImageStyle;
 
 /**
