@@ -60,4 +60,8 @@ jobs:
                sudo apt-get install -y rsync
                echo 'home27172932.1and1-data.host,2001:8d8:1000:3029:2545:d5e3:2d0f:b009 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFjDE2sDVlaHhXudMMsLEuJvY+nBuTbwLGpQkLaJ5oxIR9vXinw/2dSzqnDAlrmJ1ZgWKQnvPh7Mz770Hp/sobU=' >> ~/.ssh/known_hosts
                rsync -a ./ u7644396@home27172932.1and1-data.host:/kunden/homepages/23/d27172932/htdocs/staging/test/ && ssh u7644396@home27172932.1and1-data.host rsync -a /kunden/homepages/23/d27172932/htdocs/staging/test/ /kunden/homepages/23/d27172932/htdocs/test/
+            elif [ "${CIRCLE_BRANCH}" = 'release' ]; then
+               sudo apt-get install -y rsync
+               echo 'home27172932.1and1-data.host,2001:8d8:1000:3029:2545:d5e3:2d0f:b009 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFjDE2sDVlaHhXudMMsLEuJvY+nBuTbwLGpQkLaJ5oxIR9vXinw/2dSzqnDAlrmJ1ZgWKQnvPh7Mz770Hp/sobU=' >> ~/.ssh/known_hosts
+               rsync -a ./ u7644396@home27172932.1and1-data.host:/kunden/homepages/23/d27172932/htdocs/staging/prod/ && ssh u7644396@home27172932.1and1-data.host rsync -a /kunden/homepages/23/d27172932/htdocs/staging/prod/ /kunden/homepages/23/d27172932/htdocs/prod/
             fi
