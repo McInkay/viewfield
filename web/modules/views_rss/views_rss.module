@@ -8,22 +8,6 @@
 use \Drupal\Core\Url;
 
 /**
- * Implements hook_theme().
- */
-function views_rss_theme() {
-  $items = [
-    'xml_element' => [
-      'variables' => [
-        'tag' => NULL,
-        'value' => NULL,
-        'attributes' => NULL,
-      ],
-    ],
-  ];
-  return $items;
-}
-
-/**
  * Returns an array of item elements defined by other modules
  * with hook_views_rss_item_elements() and optionally altered with
  * hook_views_rss_item_elements_alter() implementations.

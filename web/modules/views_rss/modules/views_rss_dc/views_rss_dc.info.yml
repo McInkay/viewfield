@@ -3,12 +3,11 @@ type: module
 description: 'Provides Dublin Core Metadata element set for Views RSS.'
 package: Views
 # version: VERSION
-# core: 8.x
+core: 8.x
 dependencies:
   - views_rss
 
-# Information added by Drupal.org packaging script on 2017-11-18
-version: '8.x-2.x-dev'
-core: '8.x'
+# Information added by Drupal.org packaging script on 2020-03-16
+version: '8.x-2.0-unstable1+1-dev'
 project: 'views_rss'
-datestamp: 1511025188
+datestamp: 1584369978

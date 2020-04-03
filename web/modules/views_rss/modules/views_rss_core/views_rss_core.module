@@ -331,13 +331,13 @@ function views_rss_core_preprocess_views_view_rss(&$variables) {
   // removing them from $style->channel_elements, which would need to be
   // converted to XML again without them.
   foreach ($style->channel_elements as $delta => $channel_element) {
-    if (is_array($channel_element) && isset($channel_element['#key'])) {
-      $key = $channel_element['#key'];
+    if (is_array($channel_element) && isset($channel_element['key'])) {
+      $key = $channel_element['key'];
       // These 3 elements have the same name as their $variables key.
       if (in_array($key, array('title', 'description', 'link'))) {
         // Assign the value received from Views RSS preprocess function, instead
         // the one added by template_preprocess_views_view_rss().
-        $variables[$key] = $channel_element['#value'];
+        $variables[$key] = $channel_element['value'];
         // Also, unset these elements from $style->channel_elements to avoid
         // having them printed out twice in feed's channel element.
         unset($style->channel_elements[$delta]);
@@ -345,7 +345,7 @@ function views_rss_core_preprocess_views_view_rss(&$variables) {
       // And then, why would all $variables key names use the same names as RSS
       // elements, right? Let's make one different! Thanks Drupal. Seriously.
       if ($key == 'language') {
-        $variables['langcode'] = $channel_element['#value'];
+        $variables['langcode'] = $channel_element['value'];
         unset($style->channel_elements[$delta]);
       }
     }

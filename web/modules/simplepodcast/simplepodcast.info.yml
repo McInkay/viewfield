@@ -1,0 +1,13 @@
+name: RSS SimplePodcast
+description: Creates an XML RSS Feed for iTunes.
+type: module
+# core: 8.x
+
+dependencies:
+  - hms_field:hms_field
+
+# Information added by Drupal.org packaging script on 2019-06-14
+version: '8.x-1.8'
+core: '8.x'
+project: 'simplepodcast'
+datestamp: 1560493093

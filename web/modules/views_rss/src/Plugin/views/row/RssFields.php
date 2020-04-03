@@ -156,7 +156,7 @@ class RssFields extends RowPluginBase {
     if (!empty($field_ids)) {
       foreach ($field_ids as $field_id) {
         // Render the final field value.
-        $rendered_fields[$field_id] = $this->view->field[$field_id]->theme($row);
+        $rendered_fields[$field_id] = $this->getField($row->index, $field_id);
         // Also let's keep raw value for further processing.
         $raw_fields[$field_id] = array();
         if (method_exists($this->view->field[$field_id], 'getItems')) {

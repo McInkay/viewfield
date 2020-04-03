@@ -357,17 +357,14 @@ class RssFields extends StylePluginBase {
           // @todo find a better way of setting and passing these where they don't pass through rendering.
           $key = $rss_element['key'];
           if (in_array($key, array('title', 'description', 'link', 'language'))) {
-            $elements[] = [
-              '#key' => $key,
-              '#value' => $rss_element['value'],
-            ];
+            $elements[] = $rss_element;
             continue;
           }
 
           // Build render arrays for the other channel_elements.
           if (!empty($rss_element['value']) || !empty($rss_element['attributes'])) {
             $render_element = [
-              '#theme' => 'xml_element',
+              '#type' => 'html_tag',
               '#tag' => $rss_element['key'],
             ];
             if (!empty($rss_element['value'])) {
