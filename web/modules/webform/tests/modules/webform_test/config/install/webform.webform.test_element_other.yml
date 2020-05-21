@@ -48,6 +48,7 @@ elements: |
       '#other__counter_minimum': '4'
       '#other__counter_maximum': '10'
       '#required': true
+      '#required_error': 'This is a custom required error message.'
     select_other_multiple:
       '#type': webform_select_other
       '#title': 'Select other multiple'
@@ -261,6 +262,7 @@ settings:
   purge_days: null
   results_disabled: true
   results_disabled_ignore: false
+  results_customize: false
   token_view: false
   token_update: false
 access:
@@ -319,3 +321,4 @@ handlers:
     conditions: {  }
     weight: 1
     settings: {  }
+variants: {  }

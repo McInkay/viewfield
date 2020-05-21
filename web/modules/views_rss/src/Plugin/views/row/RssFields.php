@@ -289,9 +289,20 @@ class RssFields extends RowPluginBase {
         // Special processing for title, description and link elements, as these
         // are hardcoded both in template_preprocess_views_view_row_rss() and in
         // views-view-row-rss.html.twig, and we try to keep the compatibility.
-        if ($element == 'title' || $element == 'description' || $element == 'link') {
+        if ($element === 'title' || $element === 'link') {
           $rss_element = reset($rss_elements);
           $item->$element = $rss_element['value'];
+        }
+        // template_preprocess_views_view_row_rss() expects the description to
+        // be a renderable array.
+        elseif ($element === 'description') {
+          $rss_element = reset($rss_elements);
+          if (is_string($rss_element['value'])) {
+            $item->$element = ['#markup' => $rss_element['value']];
+          }
+          else {
+            $item->$element = $rss_element['value'];
+          }
         }
         // All other elements are custom and should go into $item->elements.
         else {

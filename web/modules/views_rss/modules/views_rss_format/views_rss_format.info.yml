@@ -2,12 +2,11 @@ name: 'Views RSS Format'
 type: module
 description: 'Provides custom version of format_xml_elements() function allowing to skip special character encoding in selected XML element values.'
 package: Views
-# version: VERSION
 core: 8.x
 dependencies:
-  - views_rss
+  - views_rss:views_rss
 
-# Information added by Drupal.org packaging script on 2020-03-16
-version: '8.x-2.0-unstable1+1-dev'
+# Information added by Drupal.org packaging script on 2020-04-11
+version: '8.x-2.0-unstable1+12-dev'
 project: 'views_rss'
-datestamp: 1584369978
+datestamp: 1586619760

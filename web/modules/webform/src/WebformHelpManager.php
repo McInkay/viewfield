@@ -1290,6 +1290,12 @@ class WebformHelpManager implements WebformHelpManagerInterface {
           ],
         ],
       ],
+      'composites_vs_tables' => [
+        'title' => $this->t('Webform Composites vs. Tables'),
+        'content' => $this->t('This screencast walks through when to use a webform composite element and when to use a webform table.'),
+        'youtube_id' => '7cVIqySy5fs',
+        'presentation_id' => '1R13ZGkNgTkxjlN-BT05zrwW2JKhOcvGiByNYl7qtywg',
+      ],
 
       'webform' => [
         'title' => $this->t('Webform: There is this for that'),
@@ -1365,7 +1371,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
             'title' => $this->t('Moving Forward with Webform in Drupal 8: Part II | WebWash'),
             'url' => 'https://www.webwash.net/moving-forward-webform-drupal-8/ ',
           ],
-        ]
+        ],
       ],
       'webwash_install' => [
         'title' => $this->t('Using Webform in Drupal 8, 1.1: Install Webform'),
@@ -1617,7 +1623,6 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         'webform.addons',
       ],
     ];
-
 
     /**************************************************************************/
     // Help.
@@ -2209,7 +2214,6 @@ class WebformHelpManager implements WebformHelpManagerInterface {
     /**************************************************************************/
     // Modules.
     /**************************************************************************/
-
 
     // Webform Entity Print (PDF).
     $help['webform_entity_print'] = [
