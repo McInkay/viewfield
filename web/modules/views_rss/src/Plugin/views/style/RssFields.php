@@ -2,6 +2,7 @@
 
 namespace Drupal\views_rss\Plugin\views\style;
 
+use Drupal\Core\Link;
 use Drupal\views\Plugin\views\style\StylePluginBase;
 use Drupal\Core\Url;
 use Drupal\Component\Utility\Xss;
@@ -175,7 +176,7 @@ class RssFields extends StylePluginBase {
             }
             // Add help link if provided.
             if (!empty($definition['help'])) {
-              $form_item['#description'] .= ' ' . \Drupal::l('[?]', Url::fromUri($definition['help']), array('attributes' => array('title' => t('Need more information?'))));
+              $form_item['#description'] .= ' ' . Link::fromTextAndUrl('[?]', Url::fromUri($definition['help']), array('attributes' => array('title' => t('Need more information?'))));
             }
             // Check if element should be displayed in a subgroup.
             if (!empty($definition['group'])) {

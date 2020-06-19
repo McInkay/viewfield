@@ -235,7 +235,7 @@ function views_rss_core_preprocess_item_category(&$variables) {
     // in the taxonomy.
     $values = array();
     // Load parent term objects (this includes original term as well).
-    if ($parents = \Drupal::entityManager()->getStorage('taxonomy_term')->loadAllParents($term->id())) {
+    if ($parents = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term')->loadAllParents($term->id())) {
       foreach ($parents as $parent) {
         $values[] = $parent->label();
       }
@@ -296,7 +296,7 @@ function views_rss_core_preprocess_item_enclosure(&$variables) {
       // Image style is defined, need to link to resized version.
       if ($image_style_name = $item['rendered']['#image_style']) {
         $image_uri = $file->getFileUri();
-        $image_style = entity_load('image_style', $image_style_name);
+        $image_style = \Drupal::service('entity_type.manager')->getStorage('image_style')->load($image_style_name);
         $image_style_uri = $image_style->buildUri($image_uri);
 
         // If the derivative doesn't exist yet, we won't be able to get its size

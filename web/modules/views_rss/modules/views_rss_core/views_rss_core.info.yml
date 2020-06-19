@@ -6,7 +6,7 @@ core: 8.x
 dependencies:
   - views_rss:views_rss
 
-# Information added by Drupal.org packaging script on 2020-04-11
-version: '8.x-2.0-unstable1+12-dev'
+# Information added by Drupal.org packaging script on 2020-06-18
+version: '8.x-2.0-unstable1+13-dev'
 project: 'views_rss'
-datestamp: 1586619760
+datestamp: 1592491297

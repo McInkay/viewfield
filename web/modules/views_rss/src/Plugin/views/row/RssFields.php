@@ -2,6 +2,7 @@
 
 namespace Drupal\views_rss\Plugin\views\row;
 
+use Drupal\Core\Link;
 use Drupal\views\Plugin\views\row\RowPluginBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
@@ -99,7 +100,7 @@ class RssFields extends RowPluginBase {
             }
             // Add help link if provided.
             if (isset($definition['help']) && $definition['help']) {
-              $form_item['#description'] .= ' ' . \Drupal::l('[?]', Url::fromUri($definition['help']), array('attributes' => array('title' => t('Need more information?'))));
+              $form_item['#description'] .= ' ' . Link::fromTextAndUrl('[?]', Url::fromUri($definition['help']), array('attributes' => array('title' => t('Need more information?'))));
             }
             // Check if element should be displayed in a subgroup.
             if (isset($definition['group']) && $definition['group']) {
