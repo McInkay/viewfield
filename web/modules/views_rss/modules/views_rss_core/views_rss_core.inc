@@ -7,6 +7,7 @@
 
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\file\FileInterface;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\core\Url;
 
@@ -292,9 +293,10 @@ function views_rss_core_preprocess_item_enclosure(&$variables) {
     }
 
     // File entity found.
-    if (!empty($file)) {
+    if (!empty($file) && $file instanceof FileInterface) {
       // Image style is defined, need to link to resized version.
-      if ($image_style_name = $item['rendered']['#image_style']) {
+      if (!empty($item['rendered']['#image_style'])) {
+        $image_style_name = $item['rendered']['#image_style'];
         $image_uri = $file->getFileUri();
         $image_style = \Drupal::service('entity_type.manager')->getStorage('image_style')->load($image_style_name);
         $image_style_uri = $image_style->buildUri($image_uri);
@@ -314,7 +316,7 @@ function views_rss_core_preprocess_item_enclosure(&$variables) {
       // Normal image size.
       else {
         $element['attributes'] = array(
-          'url' => $file->url(),
+          'url' => $file->createFileUrl(FALSE),
           'length' => $file->getSize(),
           'type' => $file->getMimeType(),
         );

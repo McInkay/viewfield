@@ -176,7 +176,7 @@ class RssFields extends StylePluginBase {
             }
             // Add help link if provided.
             if (!empty($definition['help'])) {
-              $form_item['#description'] .= ' ' . Link::fromTextAndUrl('[?]', Url::fromUri($definition['help']), array('attributes' => array('title' => t('Need more information?'))));
+              $form_item['#description'] .= ' ' . Link::fromTextAndUrl('[?]', Url::fromUri($definition['help']), array('attributes' => array('title' => t('Need more information?'))))->toString();
             }
             // Check if element should be displayed in a subgroup.
             if (!empty($definition['group'])) {

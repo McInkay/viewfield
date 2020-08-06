@@ -100,7 +100,7 @@ class RssFields extends RowPluginBase {
             }
             // Add help link if provided.
             if (isset($definition['help']) && $definition['help']) {
-              $form_item['#description'] .= ' ' . Link::fromTextAndUrl('[?]', Url::fromUri($definition['help']), array('attributes' => array('title' => t('Need more information?'))));
+              $form_item['#description'] .= ' ' . Link::fromTextAndUrl('[?]', Url::fromUri($definition['help']), array('attributes' => array('title' => t('Need more information?'))))->toString();
             }
             // Check if element should be displayed in a subgroup.
             if (isset($definition['group']) && $definition['group']) {
