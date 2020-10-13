@@ -1,0 +1,7 @@
+--- views_rss_core.inc
++++ views_rss_core.inc
+@@ -572,4 +595,4 @@ function views_rss_core_preprocess_item_author(&$variables) {
+   }
+ 
+   $variables['elements'] = $elements;
+-}+}

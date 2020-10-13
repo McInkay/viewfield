@@ -1,0 +1,196 @@
+diff --git a/modules/views_rss_core/views_rss_core.inc b/modules/views_rss_core/views_rss_core.inc
+index 3f9a542..5e2f629 100644
+--- a/modules/views_rss_core/views_rss_core.inc
++++ b/modules/views_rss_core/views_rss_core.inc
+@@ -7,8 +7,8 @@
+ 
+ use Drupal\Component\Utility\Html;
+ use Drupal\Component\Utility\UrlHelper;
++use Drupal\media\Entity\Media;
+ use Drupal\taxonomy\Entity\Term;
+ use Drupal\core\Url;
+-use Drupal\media_entity\Entity\Media;
+ use Drupal\image\Entity\ImageStyle;
+ 
+ /**
+@@ -112,26 +111,50 @@ function views_rss_core_preprocess_channel_image(&$variables) {
+   views_rss_core_preprocess_channel_title($variables);
+   $title = $variables['elements'][0]['value'];
+   // Create subelements array.
+-  $variables['elements'][0]['value'] = array(
++  $variables['elements'][0]['value'] = [
+     // The image's url element identifies the URL of the image.
+-    'url' => file_create_url($image_path),
++    [
++      '#theme' => 'xml_element',
++      '#tag' => 'url',
++      '#value' => file_create_url($image_path),
++    ],
+     // The image's title element SHOULD have the same text as the channel's
+     // title element and be suitable for use as the alt attribute of the img
+     // tag in an HTML rendering.
+-    'title' => $title,
++    [
++      '#theme' => 'xml_element',
++      '#tag' => 'title',
++      '#value' => $title,
++    ],
+     // The image's link element identifies the URL of the web site represented
+     // by the image (not the feed URL).
+-    'link' => $GLOBALS['base_url'] . '/',
+-  );
++    [
++      '#theme' => 'xml_element',
++      '#tag' => 'link',
++      '#value' => $GLOBALS['base_url'] . '/',
++    ],
++  ];
+   // Try to get image description from website's mission.
+   if ($site_slogan = \Drupal::config('system.site')->get('slogan')) {
+-    $variables['elements'][0]['value']['description'] = $site_slogan;
++    $variables['elements'][0]['value'][] = [
++      '#theme' => 'xml_element',
++      '#tag' => 'description',
++      '#value' => $site_slogan,
++    ];
+   }
+   // Get image width and height.
+   $image = Drupal::service('image.factory')->get($image_path);
+   if (!empty($image)) {
+-    $variables['elements'][0]['value']['width'] = $image->getWidth();
+-    $variables['elements'][0]['value']['height'] = $image->getHeight();
++    $variables['elements'][0]['value'][] = [
++      '#theme' => 'xml_element',
++      '#tag' => 'width',
++      '#value' => $image->getWidth(),
++    ];
++    $variables['elements'][0]['value'][] = [
++      '#theme' => 'xml_element',
++      '#tag' => 'height',
++      '#value' => $image->getHeight(),
++    ];
+   }
+ }
+ 
+@@ -293,7 +316,7 @@ function views_rss_core_preprocess_item_enclosure(&$variables) {
+     // File entity found.
+     if (!empty($file)) {
+       // Image style is defined, need to link to resized version.
+-      if ($image_style_name = $item['rendered']['#image_style']) {
++      if (isset($item['rendered']['#image_style']) && ($image_style_name = $item['rendered']['#image_style'])) {
+         $image_uri = $file->getFileUri();
+         $image_style = entity_load('image_style', $image_style_name);
+         $image_style_uri = $image_style->buildUri($image_uri);
+@@ -549,4 +572,4 @@ function views_rss_core_preprocess_item_author(&$variables) {
+   }
+ 
+   $variables['elements'] = $elements;
+-}
+\ No newline at end of file
++}
+diff --git a/modules/views_rss_core/views_rss_core.module b/modules/views_rss_core/views_rss_core.module
+index 9a80431..3a5e743 100644
+--- a/modules/views_rss_core/views_rss_core.module
++++ b/modules/views_rss_core/views_rss_core.module
+@@ -331,13 +331,13 @@ function views_rss_core_preprocess_views_view_rss(&$variables) {
+   // removing them from $style->channel_elements, which would need to be
+   // converted to XML again without them.
+   foreach ($style->channel_elements as $delta => $channel_element) {
+-    if (is_array($channel_element) && isset($channel_element['key'])) {
+-      $key = $channel_element['key'];
++    if (is_array($channel_element) && isset($channel_element['#key'])) {
++      $key = $channel_element['#key'];
+       // These 3 elements have the same name as their $variables key.
+       if (in_array($key, array('title', 'description', 'link'))) {
+         // Assign the value received from Views RSS preprocess function, instead
+         // the one added by template_preprocess_views_view_rss().
+-        $variables[$key] = $channel_element['value'];
++        $variables[$key] = $channel_element['#value'];
+         // Also, unset these elements from $style->channel_elements to avoid
+         // having them printed out twice in feed's channel element.
+         unset($style->channel_elements[$delta]);
+@@ -345,7 +345,7 @@ function views_rss_core_preprocess_views_view_rss(&$variables) {
+       // And then, why would all $variables key names use the same names as RSS
+       // elements, right? Let's make one different! Thanks Drupal. Seriously.
+       if ($key == 'language') {
+-        $variables['langcode'] = $channel_element['value'];
++        $variables['langcode'] = $channel_element['#value'];
+         unset($style->channel_elements[$delta]);
+       }
+     }
+diff --git a/src/Plugin/views/style/RssFields.php b/src/Plugin/views/style/RssFields.php
+index f73ff82..fcc82f2 100644
+--- a/src/Plugin/views/style/RssFields.php
++++ b/src/Plugin/views/style/RssFields.php
+@@ -357,14 +357,17 @@ class RssFields extends StylePluginBase {
+           // @todo find a better way of setting and passing these where they don't pass through rendering.
+           $key = $rss_element['key'];
+           if (in_array($key, array('title', 'description', 'link', 'language'))) {
+-            $elements[] = $rss_element;
++            $elements[] = [
++              '#key' => $key,
++              '#value' => $rss_element['value'],
++            ];
+             continue;
+           }
+ 
+           // Build render arrays for the other channel_elements.
+           if (!empty($rss_element['value']) || !empty($rss_element['attributes'])) {
+             $render_element = [
+-              '#type' => 'html_tag',
++              '#theme' => 'xml_element',
+               '#tag' => $rss_element['key'],
+             ];
+             if (!empty($rss_element['value'])) {
+diff --git a/templates/xml-element.html.twig b/templates/xml-element.html.twig
+new file mode 100644
+index 0000000..4581bad
+--- /dev/null
++++ b/templates/xml-element.html.twig
+@@ -0,0 +1,19 @@
++{#
++/**
++ * @file
++ * Default theme implementation for an XML element.
++ *
++ * Available variables:
++ * - tag: The XML element name.
++ * - value: (optional) The value for this XML element
++ * - attributes: (optional) XML attributes for the tag element.
++ *
++ * @ingroup themeable
++ */
++#}
++<{{ tag }}{{ attributes|default -}}
++{% if value|default -%}
++    >{{ value }}</{{ tag }}>
++{% else -%}
++    {{ ' />' }}
++{% endif %}
+diff --git a/views_rss.module b/views_rss.module
+index 7ea4073..4f40bc6 100644
+--- a/views_rss.module
++++ b/views_rss.module
+@@ -7,6 +7,22 @@
+ 
+ use \Drupal\Core\Url;
+ 
++/**
++ * Implements hook_theme().
++ */
++function views_rss_theme() {
++  $items = [
++    'xml_element' => [
++      'variables' => [
++        'tag' => NULL,
++        'value' => NULL,
++        'attributes' => NULL,
++      ],
++    ],
++  ];
++  return $items;
++}
++
+ /**
+  * Returns an array of item elements defined by other modules
+  * with hook_views_rss_item_elements() and optionally altered with
