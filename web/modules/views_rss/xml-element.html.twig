@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Default theme implementation for an XML element.
+ *
+ * Available variables:
+ * - tag: The XML element name.
+ * - value: (optional) The value for this XML element
+ * - attributes: (optional) XML attributes for the tag element.
+ *
+ * @ingroup themeable
+ */
+#}
+<{{ tag }}{{ attributes|default -}}
+{% if value|default -%}
+    >{{ value }}</{{ tag }}>
+{% else -%}
+    {{ ' />' }}
+{% endif %}
