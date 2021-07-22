@@ -7,7 +7,7 @@ core_version_requirement: ^8 || ^9
 dependencies:
   - drupal:views
 
-# Information added by Drupal.org packaging script on 2021-02-12
-version: '8.x-2.0-unstable1+18-dev'
+# Information added by Drupal.org packaging script on 2021-06-29
+version: '8.x-2.0-unstable1+19-dev'
 project: 'views_rss'
-datestamp: 1613142780
+datestamp: 1624975430
