@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_help().
@@ -21,7 +22,7 @@ function path_file_help($route_name, RouteMatchInterface $route_match) {
       $output .= '<dl>';
       $output .= '<dt>' . t('User permissions') . '</dt>';
       $output .= '<dd>' . t('The Path File module makes a number of permissions available for viewing, editing, and managing Path File entities, which can be set by role on the <a href=":permissions">permissions page</a>.', array(
-        ':permissions' => \Drupal::url('user.admin_permissions', array(), array('fragment' => 'module-path_file')),
+        ':permissions' => Url::fromRoute('user.admin_permissions', array(), array('fragment' => 'module-path_file'))->toString(),
       )) . '</dd>';
       $output .= '</dl>';
       return $output;

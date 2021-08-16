@@ -4,8 +4,6 @@ namespace Drupal\path_file;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
-use Drupal\Core\Routing\LinkGeneratorTrait;
-use Drupal\Core\Url;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -17,8 +15,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @ingroup path_file
  */
 class PathFileEntityListBuilder extends EntityListBuilder {
-
-  use LinkGeneratorTrait;
 
   /**
    * The date formatter service.
@@ -49,7 +45,7 @@ class PathFileEntityListBuilder extends EntityListBuilder {
   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
     return new static(
     $entity_type,
-    $container->get('entity.manager')->getStorage($entity_type->id()),
+    $container->get('entity_type.manager')->getStorage($entity_type->id()),
     $container->get('date.formatter')
     );
   }
@@ -80,24 +76,10 @@ class PathFileEntityListBuilder extends EntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\path_file\Entity\PathFileEntity */
     // display name as a link to the edit form
-    $row['name'] = $this->l(
-        $entity->label(),
-        new Url(
-            'entity.path_file_entity.edit_form', array(
-              'path_file_entity' => $entity->id(),
-            )
-        )
-    );
+    $row['name'] = $entity->toLink(NULL, 'edit-form');
 
     // Display path, links to the file itself.
-    $url = $entity->url();
-    $row['url'] = $this->l(
-        $url, new Url(
-            'entity.path_file_entity.canonical', array(
-              'path_file_entity' => $entity->id(),
-            )
-        )
-    );
+    $row['url'] = $entity->toLink($entity->toUrl()->toString());
 
     // Show published status.
     $row['status'] = $entity->isPublished() ? $this->t('published') : $this->t('not published');

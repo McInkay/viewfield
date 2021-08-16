@@ -117,7 +117,7 @@ class PathFileEntityForm extends ContentEntityForm {
 
     switch ($status) {
       case SAVED_NEW:
-        drupal_set_message(
+        $this->messenger()->addMessage(
             $this->t(
                 'Created the %label Path file entity.', [
                   '%label' => $entity->label(),
@@ -127,7 +127,7 @@ class PathFileEntityForm extends ContentEntityForm {
         break;
 
       default:
-        drupal_set_message(
+        $this->messenger()->addMessage(
             $this->t(
                 'Saved the %label Path file entity.', [
                   '%label' => $entity->label(),

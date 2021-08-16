@@ -1,17 +1,16 @@
 name: Path File
-description: Creates a new content type which can will render a file at the given path
+description: Creates a new content type which can will render a file at the given path.
 package: File
 
 type: module
-# core: 8.x
+core_version_requirement: ^8.8 || ^9
 
 configure: entity.path_file_entity.collection
 
 dependencies:
-  - file
+  - drupal:file
 
-# Information added by Drupal.org packaging script on 2016-12-21
-version: '8.x-1.0'
-core: '8.x'
+# Information added by Drupal.org packaging script on 2021-08-02
+version: '8.x-1.1'
 project: 'path_file'
-datestamp: 1482357490
+datestamp: 1627934344
