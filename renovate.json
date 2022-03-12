@@ -2,6 +2,11 @@
   "extends": [
     "config:base"
   ],
-  "assignees": ["McInkay"],
+  "assignees": ["AlMcKinlay"],
+  "schedule": ["after 6am and before 4pm on every weekday"],
+  "automerge": true,
+  "major": {
+    "automerge": false
+  },
   "ignorePaths": ["web/modules"]
 }
